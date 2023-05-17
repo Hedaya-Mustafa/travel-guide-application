@@ -14,6 +14,7 @@ public class dataBaseHelper extends android.database.sqlite.SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL("CREATE TABLE TRAVELLER(EMAIL TEXT PRIMARY KEY  NOT NULL , FIRSTNAME TEXT, LASTNAME TEXT, PASSWORD TEXT, GCONFIRM TEXT, PREFERRED TEXT)");
+        sqLiteDatabase.execSQL("CREATE TABLE DESTINATION(CITY TEXT PRIMARY KEY  NOT NULL  , COUNTRY TEXT, CONTINENT TEXT, LONGITUDE TEXT, LATITUDE TEXT, COST TEXT,IMG TEXT,DESCRIPTION TEXT)");
     }
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
@@ -68,6 +69,50 @@ public class dataBaseHelper extends android.database.sqlite.SQLiteOpenHelper {
             return false;
         }
     }
+    //--------------------------------------------------------------------
+    public Cursor getAllInformation_ofOne_preferredContinent(String city_prefContinent){
+        String[] selection = {city_prefContinent};
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+//        String query = "SELECT * FROM DESTINATION WHERE CITY= +'"+city_prefContinent+"'";
+        return sqLiteDatabase.rawQuery("SELECT * FROM DESTINATION WHERE CITY=?", selection);
+
+//        return sqLiteDatabase.rawQuery(query, null);
+    }
+
+    //-------------------------------------------------------------------------------
+    //this is fuction to insert the destination to data base helper
+    public void insertDestination(Destination destination) {
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        System.out.println("city = " +destination.getCity());
+
+        contentValues.put("CITY", destination.getCity());
+        contentValues.put("COUNTRY", destination.getCountry());
+        contentValues.put("CONTINENT", destination.getContinent());
+        contentValues.put("LONGITUDE", destination.getLongitude());
+        contentValues.put("LATITUDE", destination.getLatitude());
+        contentValues.put("COST", destination.getCost());
+        contentValues.put("IMG", destination.getImg());
+        contentValues.put("DESCRIPTION", destination.getDescription());
+
+        long res =sqLiteDatabase.insert("DESTINATION", null, contentValues);
+        System.out.println("res = " +res);
+    }
+
+    public Cursor getAll() {
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        return sqLiteDatabase.rawQuery("SELECT * FROM DESTINATION", null);
+
+    }
+    //    --------------------------------------------------------
+    public Cursor getCitesByGivenContinent(String cont) {
+        String[] selectionArgs = {cont};
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        return sqLiteDatabase.rawQuery("SELECT CITY FROM DESTINATION WHERE CONTINENT=?", selectionArgs);
+    }
+
+
 
 
 

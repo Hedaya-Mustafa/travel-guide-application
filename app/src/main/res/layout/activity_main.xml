@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/background" />
+        android:src="@drawable/bg" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -20,9 +20,10 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="116dp"
         android:layout_marginEnd="8dp"
+        android:fontFamily="serif"
         android:text="Welcome To Your Travel Guide"
         android:textColor="@android:color/white"
-        android:textSize="30sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.174"
@@ -46,6 +47,7 @@
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
             android:backgroundTint="@android:color/transparent"
+            android:fontFamily="serif"
             android:hint="Enter Your Email Address"
             android:inputType="textEmailAddress"
             android:padding="15dp"
@@ -67,6 +69,7 @@
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
             android:backgroundTint="@android:color/transparent"
+            android:fontFamily="serif"
             android:hint="Enter Your Password"
             android:inputType="textPassword"
             android:padding="15dp"
@@ -111,6 +114,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_centerInParent="true"
                 android:layout_marginStart="30dp"
+                android:fontFamily="serif"
                 android:padding="15dp"
                 android:text="Sign In"
                 android:textColor="#E1D9D9"
@@ -125,6 +129,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="275dp"
                 android:layout_marginBottom="71dp"
+                android:fontFamily="serif"
                 android:text="Remember Me"
                 android:textAlignment="viewStart"
                 android:textColor="#ECE1E1" />
@@ -143,6 +148,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginStart="36dp"
+                android:fontFamily="serif"
                 android:onClick="Open_Sign_up"
                 android:padding="15dp"
                 android:text="Sign Up"

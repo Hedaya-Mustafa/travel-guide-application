@@ -10,10 +10,14 @@ import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     // define database helper and SharedPrefManager
@@ -32,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         getWindow().setStatusBarColor(Color.TRANSPARENT);
         setContentView(R.layout.activity_main);
+
+//        ConnectionAsyncTask connectionAsyncTask = new ConnectionAsyncTask(MainActivity.this);
+//        connectionAsyncTask.execute("https://run.mocky.io/v3/d1a9c002-6e88-4d1e-9f39-930615876bca");
     }
 
     //================================================================
@@ -82,6 +89,9 @@ public class MainActivity extends AppCompatActivity {
                     Toast toast =Toast.makeText(MainActivity.this, "login successfully",Toast.LENGTH_SHORT);
                     toast.show();
                     OpenHomePage(email.getText().toString());
+                    List<Destination> destinations = new ArrayList<Destination>();
+                    store_Destination(destinations);
+
                 }else{
                     email.setHint("Email");
                     email.setHintTextColor(Color.RED);
@@ -105,6 +115,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void OpenHomePage(String email) {
         startActivity(new Intent(MainActivity.this,NavHome.class).putExtra(EXTRA_EMAIL,email));
+    }
+
+    public void store_Destination(List<Destination> destinations) {
+        dataBaseHelper destination_data = new dataBaseHelper(MainActivity.this, "database", null, 1);
+
+        for (int i = 0; i < destinations.size(); i++) {
+            System.out.println ("destination("+i+")"+destinations.get(i).toString() +"\n");
+           destination_data.insertDestination(destinations.get(i));
+        }
     }
 
 }
